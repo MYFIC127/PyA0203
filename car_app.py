@@ -11,6 +11,7 @@ class Car:
         self.year = year
         self.price = price
         self.color = color
+        self.__maxprice = 250000    #Private Attribute
         self.checkup = []
 
     def add_checkup(self, date):        #instance method
@@ -62,12 +63,30 @@ class Car:
             return True
         else:
             return False
+        
+
+class Motor(Car):
+    wheels = 2
+    def __init__(self, maker, model, year, price, capacity, color="white"):
+        Car.__init__(self, maker, model, year, price, color)
+        self.capacity = capacity
+
+    def leased(self, months):       #Polymorphism
+        instalment=self.Price*1.2/months
+        return instalment
+
+
+
+
 #----------------< Main >-------------
 car1 = Car("Toyota", "Camry", 2022, 32000, "Blue")
 car2 = Car("BMW", "518i", 2020, 45000)
 car3 = Car("Benz", "69420", 2017, 65001)
 car4 = Car("Subaru", "Kyun", 2015, 1003)
 # car1.add_checkup("2023/06/08")
+
+
+motor1 = Motor("Suzuki","iB230", 2021, 15000, 1000)
 
 # print(car1)             #__str__
 # print(repr(car1))       #__repr__
@@ -84,4 +103,4 @@ car4 = Car("Subaru", "Kyun", 2015, 1003)
 # print(car1.__dict__)    #__dict__
 
 # print((car1+car2).price)
-print(car1-car2-car3-car4-430)
+# print(car1-car2-car3-car4-430)
