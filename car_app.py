@@ -1,4 +1,4 @@
-#-----------< V.0.2.0 >-----------
+#-----------< V.0.3.0 >-----------
 from typing import Any
 #TODO: 
 
@@ -23,6 +23,17 @@ class Car:
         else :
             instalment = int(self.price * 1.1 / months)
         return instalment
+
+    @property
+    def price(self):            #Getter
+        return self._price
+    
+    @price.setter
+    def price(self, value):     #Setter
+        if 20000<=value<=200000:
+            self._price = value
+        else:
+            raise Exception("!Price Must be between 20k $ & 200k $")
 
     def __str__(self) -> str:
         return f"{self.maker}-{self.model}"
@@ -82,11 +93,12 @@ class Motor(Car):
 car1 = Car("Toyota", "Camry", 2022, 32000, "Blue")
 car2 = Car("BMW", "518i", 2020, 45000)
 car3 = Car("Benz", "69420", 2017, 65001)
-car4 = Car("Subaru", "Kyun", 2015, 1003)
+car4 = Car("Subaru", "Kyun", 2015, 100003)
 # car1.add_checkup("2023/06/08")
 
+# car1.price = 2
 
-motor1 = Motor("Suzuki","iB230", 2021, 15000, 1000)
+motor1 = Motor("Suzuki","iB230", 2021, 150000, 1000)
 
 # print(car1)             #__str__
 # print(repr(car1))       #__repr__
