@@ -1,11 +1,13 @@
-#-----------< V.0.3.0 >-----------
+#-----------< V.0.4.0 >-----------
 from typing import Any
+import sqliteDB
 #TODO: 
 
 class Car:
     '''Car class to describes a 4 wheeled car'''
     wheels = 4          #class attribute
-    def __init__(self, maker, model, year, price, color="white"):
+    def __init__(self,car_id, maker, model, year, price, color="white"):
+        self.car_id = car_id
         self.maker = maker          #instance attribute
         self.model = model
         self.year = year
@@ -13,6 +15,7 @@ class Car:
         self.color = color
         self.__maxprice = 250000    #Private Attribute
         self.checkup = []
+        sqliteDB.new_car(self.car_id, self.maker, self.model, self.year, self.price, self.color)
 
     def add_checkup(self, date):        #instance method
         self.checkup.append(date)
@@ -34,6 +37,17 @@ class Car:
             self._price = value
         else:
             raise Exception("!Price Must be between 20k $ & 200k $")
+
+    @property
+    def car_id(self):
+        return self._car_id
+    
+    @car_id.setter
+    def car_id(self, value):
+        if len(str(value)) == 5:
+            self._car_id = value
+        else:
+            raise Exception("ID NOT UNIQUE")
 
     def __str__(self) -> str:
         return f"{self.maker}-{self.model}"
@@ -75,6 +89,7 @@ class Car:
         else:
             return False
         
+    
 
 class Motor(Car):
     wheels = 2
@@ -90,15 +105,27 @@ class Motor(Car):
 
 
 #----------------< Main >-------------
-car1 = Car("Toyota", "Camry", 2022, 32000, "Blue")
-car2 = Car("BMW", "518i", 2020, 45000)
-car3 = Car("Benz", "69420", 2017, 65001)
-car4 = Car("Subaru", "Kyun", 2015, 100003)
+car1 = Car(10104, "Toyota", "Camry", 2020, 32000, "Blue")
+
+
+
+
+
+
+
+
+
+
+
+
+# car2 = Car("BMW", "518i", 2020, 45000)
+# car3 = Car("Benz", "69420", 2017, 65001)
+# car4 = Car("Subaru", "Kyun", 2015, 100003)
 # car1.add_checkup("2023/06/08")
 
 # car1.price = 2
 
-motor1 = Motor("Suzuki","iB230", 2021, 150000, 1000)
+# motor1 = Motor("Suzuki","iB230", 2021, 150000, 1000)
 
 # print(car1)             #__str__
 # print(repr(car1))       #__repr__
