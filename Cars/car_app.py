@@ -2,7 +2,6 @@
 from typing import Any
 import sqliteDB
 #TODO: 
-
 class Car:
     '''Car class to describes a 4 wheeled car'''
     wheels = 4          #class attribute
@@ -48,6 +47,20 @@ class Car:
             self._car_id = value
         else:
             raise Exception("ID NOT UNIQUE")
+
+    @staticmethod                       # a Query to Database
+    def car_info(carid):
+        return sqliteDB.car_information(carid)
+    
+    @staticmethod                       
+    def maker_info(maker):
+        cars = sqliteDB.maker_information(maker)
+        print (len(cars))
+        return cars
+    
+    @staticmethod
+    def raise_price(percent):
+        sqliteDB.raise_car_price(percent)
 
     def __str__(self) -> str:
         return f"{self.maker}-{self.model}"
@@ -105,11 +118,11 @@ class Motor(Car):
 
 
 #----------------< Main >-------------
-car1 = Car(10104, "Toyota", "Camry", 2020, 32000, "Blue")
+# car1 = Car(10104, "Toyota", "Camry", 2020, 32000, "Blue")
 
 
-
-
+# print(Car.maker_info("Toyota"),len(Car.maker_info("Toyota")))
+Car.raise_price(5)
 
 
 
