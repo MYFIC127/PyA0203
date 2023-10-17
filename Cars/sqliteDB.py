@@ -1,4 +1,4 @@
-#TODO: Random id generator, pandas , query maker -> all made cars + count
+#TODO: Random id generator, pandas 
 import sqlite3
 from sys import path
 
@@ -24,12 +24,17 @@ def car_information(carid):
 
 def maker_information(maker):
     info = list(cursor.execute("SELECT * FROM cars_table WHERE maker=?",(maker,)))
+    models = []
+    i = 0
     if len(info)==0 :
         raise ValueError("Maker not found !")
-    return info
+    for car in info:
+        models += [car[2]]
+
+    return models
 
 def raise_car_price(percent):
-    cursor.execute("UPDATE cars_table SET price=price + price *(?/100)",(percent,))   
+    cursor.execute("UPDATE cars_table SET price=price*?",(1 + percent/100,))   
     database.commit()
 
 #-----------------< Main>------------------
@@ -39,4 +44,4 @@ cursor = database.cursor()
 
 # all_cars = list(cursor.execute("SELECT car_id,maker,price FROM cars_table WHERE maker=? ORDER BY price",["Toyota"]))
 # print(car_info(10102))
-# maker_information("Toyota")
+# print(maker_information("Toyota"))

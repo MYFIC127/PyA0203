@@ -55,7 +55,7 @@ class Car:
     @staticmethod                       
     def maker_info(maker):
         cars = sqliteDB.maker_information(maker)
-        print (len(cars))
+        print ("Count=", len(cars))
         return cars
     
     @staticmethod
@@ -121,8 +121,8 @@ class Motor(Car):
 # car1 = Car(10104, "Toyota", "Camry", 2020, 32000, "Blue")
 
 
-# print(Car.maker_info("Toyota"),len(Car.maker_info("Toyota")))
-Car.raise_price(5)
+print(Car.maker_info("Toyota"))
+# Car.raise_price(5)
 
 
 
